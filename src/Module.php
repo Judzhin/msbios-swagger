@@ -11,15 +11,17 @@ use Zend\Loader\StandardAutoloader;
 
 /**
  * Class Module
- * @package MSBios\Authentication
+ * @package MSBios\Swagger
  */
 class Module implements ModuleInterface
 {
     /** @const VERSION */
-    const VERSION = '1.0.15';
+    const VERSION = '1.0.0';
 
     /**
-     * @return mixed
+     * @inheritdoc
+     *
+     * @return array|mixed|\Traversable
      */
     public function getConfig()
     {
@@ -27,7 +29,7 @@ class Module implements ModuleInterface
     }
 
     /**
-     * Return an array for passing to Zend\Loader\AutoloaderFactory.
+     * @inheritdoc
      *
      * @return array
      */
