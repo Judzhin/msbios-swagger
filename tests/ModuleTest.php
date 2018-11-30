@@ -3,9 +3,9 @@
  * @access protected
  * @author Judzhin Miles <info[woof-woof]msbios.com>
  */
-namespace MSBiosTest\Authentication;
+namespace MSBiosTest\Swagger;
 
-use MSBios\Authentication\Module;
+use MSBios\Swagger\Module;
 use PHPUnit\Framework\TestCase;
 
 /**

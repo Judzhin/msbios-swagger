@@ -58,5 +58,4 @@ class ExampleController extends AbstractRestfulController
     {
         return parent::update($id, $data);
     }
-
 }

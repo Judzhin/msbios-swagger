@@ -43,6 +43,7 @@ class SwaggerController extends AbstractActionController
     public function apiAction()
     {
         header('Content-Type: application/json');
-        echo $this->openApi->toJson(); die();
+        echo $this->openApi->toJson();
+        die();
     }
 }
