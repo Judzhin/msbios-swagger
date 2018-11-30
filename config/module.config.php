@@ -5,91 +5,72 @@
  */
 namespace MSBios\Swagger;
 
-use Zend\Router\Http\Literal;
+use MSBios\Factory\ModuleFactory;
+use OpenApi\Annotations\OpenApi;
 use Zend\Router\Http\Segment;
-use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
-//    'router' => [
-//        'routes' => [
-//            'home' => [
-//                'type' => Literal::class,
-//                'options' => [
-//                    'route' => '/',
-//                    'defaults' => [
-//                        'controller' => Controller\IndexController::class,
-//                        'action' => 'index',
-//                    ],
-//                ],
-//            ],
-//            'application' => [
-//                'type' => Segment::class,
-//                'options' => [
-//                    'route' => '/application[/:action]',
-//                    'defaults' => [
-//                        'controller' => Controller\IndexController::class,
-//                        'action' => 'index',
-//                    ],
-//                ],
-//            ],
-//        ],
-//    ],
-//
-//    'controllers' => [
-//        'factories' => [
-//            Controller\IndexController::class =>
-//                InvokableFactory::class,
-//        ]
-//    ],
-//
-//    'view_manager' => [
-//        'display_not_found_reason' => true,
-//        'display_exceptions' => true,
-//        'doctype' => 'HTML5',
-//        'not_found_template' => 'error/404',
-//        'exception_template' => 'error/index',
-//        'template_map' => [
-//            // 'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
-//            // 'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
-//            // 'error/404' => __DIR__ . '/../view/error/404.phtml',
-//            // 'error/index' => __DIR__ . '/../view/error/index.phtml',
-//        ],
-//        'template_path_stack' => [
-//            __DIR__ . '/../view',
-//        ],
-//    ],
-//
-//    'widget_manager' => [
-//        'factories' => [
-//            Widget\FollowDevelopmentWidget::class =>
-//                InvokableFactory::class
-//        ]
-//    ],
-//
-//    \MSBios\Theme\Module::class => [
-//        'themes' => [
-//            'default' => [
-//                'identifier' => 'default',
-//                'title' => 'Default Application Theme',
-//                'description' => 'Default Application Theme Description',
-//                'template_path_stack' => [
-//                    __DIR__ . '/../themes/default/view/',
-//                ],
-//                'translation_file_patterns' => [
-//                    [
-//                        'type' => 'gettext',
-//                        'base_dir' => __DIR__ . '/../themes/default/language/',
-//                        'pattern' => '%s.mo',
-//                    ],
-//                ],
-//                'widget_manager' => [
-//                    'template_map' => [
-//                    ],
-//                    'template_path_stack' => [
-//                        __DIR__ . '/../themes/default/widget/'
-//                    ],
-//                ],
-//            ]
-//        ]
-//    ]
+    'router' => [
+        'routes' => [
+            'swagger' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/swagger[/]',
+                    'defaults' => [
+                        'controller' => Controller\SwaggerController::class,
+                        'action' => 'index',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'api' => [
+                        'type' => Segment::class,
+                        'options' => [
+                            'route' => 'api[.:format]',
+                            'defaults' => [
+                                'action' => 'api',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+
+    'controllers' => [
+        'factories' => [
+            Controller\SwaggerController::class =>
+                Factory\SwaggerControllerFactory::class,
+        ]
+    ],
+
+    'service_manager' => [
+        'factories' => [
+            Module::class =>
+                ModuleFactory::class,
+            OpenApi::class =>
+                Factory\OpenApiFactory::class
+        ],
+    ],
+
+    'view_manager' => [
+        'template_path_stack' => [
+            __DIR__ . '/../view',
+        ],
+    ],
+
+    Module::class => [
+
+        /**
+         *
+         */
+        'directory' => null,
+
+        /**
+         *
+         */
+        'options' => [
+            // ...
+        ]
+    ]
 ];

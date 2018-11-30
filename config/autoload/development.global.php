@@ -23,4 +23,10 @@ return [
                 __DIR__ . '/../../themes/default/public/img/zf-logo-mark.svg',
         ],
     ],
+
+    \MSBios\Swagger\Module::class => [
+        'directory' => [
+            __DIR__ . '/../../src/V1'
+        ],
+    ]
 ];
