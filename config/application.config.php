@@ -6,6 +6,14 @@
 return [
     // Retrieve list of modules used in this application.
     'modules' => [
+        'MSBios\Application',
+        'MSBios\Theme',
+        'MSBios\Widget',
+        'MSBios\View',
+        'MSBios\Assetic',
+        'MSBios\Cache',
+        'MSBios\I18n',
+        'MSBios\Navigation',
         'Zend\Cache',
         'Zend\Serializer',
         'Zend\I18n',

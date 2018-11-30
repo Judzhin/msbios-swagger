@@ -24,10 +24,13 @@
     }
   },
   "require": {
-    "msbios/msbios": "^1.0"
+    "msbios/msbios": "^1.0",
+    "zircote/swagger-php": "^3.0"
   },
   "require-dev": {
-    "msbios/test": "^1.0"
+    "msbios/application": "^1.0",
+    "msbios/test": "^1.0",
+    "msbios/debug": "^1.0"
   },
   "scripts": {
     "cs-check": "phpcs",
@@ -36,6 +39,7 @@
       "@cs-check",
       "phpunit --colors=always"
     ],
+    "serve": "php -S 0.0.0.0:3107 -t public public/index.php",
     "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
     "upload-coverage": "coveralls -v",
     "commit": "git add . && git commit -a -m \"Lazy Composer Commiter\" && git push"
